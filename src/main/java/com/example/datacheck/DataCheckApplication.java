@@ -156,7 +156,8 @@ public class DataCheckApplication implements CommandLineRunner {
             sql = "SELECT COUNT(*) FROM " + schemaExpr + "." + tableExpr + " WHERE " + columnExpr + " REGEXP ?";
             params = new Object[]{ID_CARD_REGEX};
         } else {
-            sql = "SELECT COUNT(*) FROM " + tableExpr + " WHERE REGEXP_LIKE(" + columnExpr + ", ?)";
+            String schemaExpr = quoteIdentifier(args.dbType, args.schema.toUpperCase());
+            sql = "SELECT COUNT(*) FROM " + schemaExpr + "." + tableExpr + " WHERE REGEXP_LIKE(" + columnExpr + ", ?)";
             params = new Object[]{ID_CARD_REGEX};
         }
 
